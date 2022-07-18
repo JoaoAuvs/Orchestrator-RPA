@@ -51,6 +51,13 @@ python manage.py migrate
 python manage.py runserver 8081
 ```
 
+## Dados da Autenticação:
+
+```
+login: admin
+password: admin@admin
+```
+
 Pronto!
 
 ## Autores 
