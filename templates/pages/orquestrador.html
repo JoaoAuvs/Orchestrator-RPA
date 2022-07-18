@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Nome Empresa - Orquestrador{% endblock title %}
+
+{% if request.user.is_authenticated %}
+
+{% block content %}
+    <div class="home-section">
+        {% if user.is_staff %}
+            {% include 'pages/cards.html' %}
+        {% endif %}
+        <div class="table">
+            <div class="recentOrders">
+                <div class="cardHeader">
+                    <h2>Robôs: </h2>
+                    <h2>
+                        {% for group in request.user.groups.all %}<div class="job">{{group.name}}</div>{% endfor %}
+                    <h2>
+                </div>
+                <table id="table-lista" style="width:100%">
+                    <thead>
+                        <tr>
+                            <td>Nome</td>
+                            <td>Orquestrador</td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for indice, robo in robos.items %}
+                        <tr>
+                            <td id="title_table">{{ robo.nome }}</td>
+                            <td id="orquestrador_table">
+
+                                {% if robo.status == "OPERACIONAL" %}    
+                                    <button href="update-status/robo/{{robo.id}}" type="submitButton" class="button" value={{ robo.nome_alternativo }} vm={{ robo.vm.ip }}>
+                                        <span class="button_text">Executar</span>
+                                        <box-icon name='play'></box-icon></span>
+                                        {{ botao }}
+                                    </button>
+                                {% else %}
+                                    <button type="submitButton" class="button" disabled>
+                                        <span class="button_text">Executar</span>
+                                        <box-icon name='play'></box-icon></span>
+                                    </button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% endblock content %}
+
+{% endif %}
+
+{% block scripts %}
+
+    <script src="{% static 'js/socket.js' %}"></script>
+    
+{% endblock scripts %}

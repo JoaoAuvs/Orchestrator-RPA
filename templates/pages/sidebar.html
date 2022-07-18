@@ -1,0 +1,47 @@
+{% load static %}
+
+<div class="sidebar">
+    <div class="logo-details">
+        <img class="logo icon justifiy-content-center" src="{% static 'img/logo.png' %}">
+        <i class='bx bx-menu' id="btn"></i>
+    </div>
+    <ul class="nav-list">
+        {% if user.is_staff %}
+        <li>
+            <a href="{% url 'admin:index' %}">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Administrativo</span>
+            </a>
+            <span class="tooltip">Administrativo</span>
+        </li>
+        {% endif %}
+        <li>
+            <a href="{% url 'orquestrador' %}" active>
+                <i class='bx bx-folder' ></i>
+                <span class="links_name">Orquestrador</span>
+            </a>
+            <span class="tooltip">Orquestrador</span>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-cog' ></i>
+                <span class="links_name">Configurações</span>
+            </a>
+            <span class="tooltip">Configurações</span>
+        </li>
+        <li class="profile">
+            <div class="profile-details">
+                <img src="{% static 'img/robo.png' %}">
+                <div class="name_job">
+                    <div class="name">{{ user.first_name }} {{ user.last_name }}</div>
+                    {% for group in request.user.groups.all %}
+                        <div class="job">{{group.name}}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <a href="{% url 'logout' %}">
+                <i class='bx bx-log-out' id="log_out" ></i>
+            </a>
+        </li>
+    </ul>
+</div>

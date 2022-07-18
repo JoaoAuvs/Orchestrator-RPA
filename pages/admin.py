@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Robo, Vm
+
+admin.site.register(Robo)
+admin.site.register(Vm)
