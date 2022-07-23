@@ -32,7 +32,6 @@
                         <tr>
                             <td id="title_table">{{ robo.nome }}</td>
                             <td id="orquestrador_table">
-
                                 {% if robo.status == "OPERACIONAL" %}    
                                     <button href="update-status/robo/{{robo.id}}" type="submitButton" class="button" value={{ robo.nome_alternativo }} vm={{ robo.vm.ip }}>
                                         <span class="button_text">Executar</span>
